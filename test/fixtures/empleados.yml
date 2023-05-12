@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departamento: one
+  cargo: one
+  nombres: MyString
+  apellidos: MyString
+  email: MyString
+
+two:
+  departamento: two
+  cargo: two
+  nombres: MyString
+  apellidos: MyString
+  email: MyString
