@@ -1,0 +1,67 @@
+    <div class="pagetitle">
+      <h1>Asignaciones de empleados a misiones</h1>
+      <br/>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to 'Inicio', "/" %></li>
+          <li class="breadcrumb-item active">Asignaciones de empleados a misiones</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+        <% if acceso_a_accion_de_modulo?(current_usuario, "misiones_empleados", "crear") %>
+        <div class="col-6" style="text-align: right;">
+            <%= link_to 'Agregar asignacion', new_misiones_empleado_path, {class: "btn btn-primary", style: "margin-top:-100px"} %>
+        </div>
+        <%end%>
+    </div>
+<section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center" >Administrar asignaciones de empleados a misiones</h5>
+                    <% if @misiones_empleados.present? %><a href="<%= generar_reporte_misiones_empleados_path(empleado: params[:empleado], mision: params[:mision], format: :xlsx) %>" class= "btn btn-primary" style="margin: 17px 0 0 10px; float:right;">Generar reporte</a><% end %>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Empleado</th>
+                      <th scope="col">Mision</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @misiones_empleados.each do |misiones_empleado| %>
+                        <tr>
+                            <th scope="row"><%= misiones_empleado.id %></th>
+                            <td><%= misiones_empleado.empleado.presentacion %></td>
+                            <td><%= misiones_empleado.misione.nombre %></td>
+                            <td>
+                                <%= link_to '', edit_misiones_empleado_path(misiones_empleado), {class: "bx bx-pencil", style: "color:blue;"} if acceso_a_accion_de_modulo?(current_usuario, "misiones_empleados", "actualizar") %>
+                                <%= link_to '', misiones_empleado, {method: :delete, class: "bx bx-trash", style: "color:red;", data: {confirm: "Estas seguro de eliminar esta asignacion de mision a empleado?"}} if acceso_a_accion_de_modulo?(current_usuario, "misiones_empleados", "eliminar") %>
+                            </td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+    <script>
+        $( document ).ready(function() {
+            $("#misiones_empleados").removeClass("collapsed");
+        });
+    </script>

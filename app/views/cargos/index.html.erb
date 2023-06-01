@@ -1,0 +1,66 @@
+
+
+    <div class="pagetitle">
+      <h1>Cargos</h1>
+      <br/>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to 'Inicio', "/" %></li>
+          <li class="breadcrumb-item active">Cargos</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+        <% if acceso_a_accion_de_modulo?(current_usuario, "cargos", "crear") %>
+        <div class="col-6" style="text-align: right;">
+            <%= link_to 'Agregar cargo', new_cargo_path, {class: "btn btn-primary", style: "margin-top:-100px"} %>
+        </div>
+        <% end %>
+    </div>
+<section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center" >Administrar cargos</h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @cargos.each do |cargo| %>
+                        <tr>
+                            <th scope="row"><%= cargo.id %></th>
+                            <td><%= cargo.nombre %></td>
+                            <td>
+                                <%= link_to '', edit_cargo_path(cargo), {class: "bx bx-pencil", style: "color:blue;"} if acceso_a_accion_de_modulo?(current_usuario, "cargos", "actualizar") %>
+                                <%= link_to '', cargo, {method: :delete, class: "bx bx-trash", style: "color:red;", data: {confirm: "Estas seguro de eliminar este cargo?"}} if acceso_a_accion_de_modulo?(current_usuario, "cargos", "eliminar") %>
+                            </td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+    <script>
+        $( document ).ready(function() {
+            $("#cargos").removeClass("collapsed");
+        });
+    </script>

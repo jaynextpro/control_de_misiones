@@ -1,0 +1,11 @@
+<h1>Agregar Cargo</h1>
+
+<%= render 'form', cargo: @cargo, accion: "Crear cargo" %>
+
+<%= link_to 'Regresar', cargos_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#cargos").removeClass("collapsed");
+        });
+    </script>

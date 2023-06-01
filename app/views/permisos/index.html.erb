@@ -1,0 +1,100 @@
+
+
+    <div class="pagetitle">
+      <h1>permisos</h1>
+      <br/>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to 'Inicio', "/" %></li>
+          <li class="breadcrumb-item active">permisos</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+        <% if acceso_a_accion_de_modulo?(current_usuario, "permisos", "crear") %>
+        <div class="col-6" style="text-align: right;">
+            <%= link_to 'Agregar permiso', new_permiso_path, {class: "btn btn-primary", style: "margin-top:-100px"} %>
+        </div>
+        <%end%>
+    </div>
+<section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center" >Administrar permisos</h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Modulo</th>
+                      <th scope="col">Rol</th>
+                      <th scope="col">Activo</th>
+                      <th scope="col">Crear</th>
+                      <th scope="col">Actualizar</th>
+                      <th scope="col">Eliminar</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @permisos.each do |permiso| %>
+                        <tr>
+                            <th scope="row"><%= permiso.id %></th>
+                            <td><%= permiso.modulo.nombre %></td>
+                            <td><%= permiso.role.nombre %></td>
+                            <td>
+                              <% if permiso.activo %>
+                                <span class="bi bi-check-circle"></span>
+                              <% else %>
+                                <span class="bi bi-x-circle"></span>
+                              <% end %>
+                            </td>
+                            <td>
+                              <% if permiso.crear %>
+                                <span class="bi bi-check-circle"></span>
+                              <% else %>
+                                <span class="bi bi-x-circle"></span>
+                              <% end %>
+                            </td>
+                            <td>
+                              <% if permiso.actualizar %>
+                                <span class="bi bi-check-circle"></span>
+                              <% else %>
+                                <span class="bi bi-x-circle"></span>
+                              <% end %>
+                            </td>
+                            <td>
+                              <% if permiso.eliminar %>
+                                <span class="bi bi-check-circle"></span>
+                              <% else %>
+                                <span class="bi bi-x-circle"></span>
+                              <% end %>
+                            </td>
+                            <td>
+                                <%= link_to '', edit_permiso_path(permiso), {class: "bx bx-pencil", style: "color:blue;"} if acceso_a_accion_de_modulo?(current_usuario, "permisos", "actualizar")%>
+                                <%= link_to '', permiso, {method: :delete, class: "bx bx-trash", style: "color:red;", data: {confirm: "Estas seguro de eliminar este permiso?"}} if acceso_a_accion_de_modulo?(current_usuario, "permisos", "eliminar") %>
+                            </td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+    <script>
+        $( document ).ready(function() {
+            $("#permisos").removeClass("collapsed");
+        });
+    </script>

@@ -1,0 +1,77 @@
+
+
+    <div class="pagetitle">
+      <h1>empleados</h1>
+      <br/>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to 'Inicio', "/" %></li>
+          <li class="breadcrumb-item active">empleados</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+        <% if acceso_a_accion_de_modulo?(current_usuario, "empleados", "crear") %>
+        <div class="col-6" style="text-align: right;">
+            <%= link_to 'Agregar empleado', new_empleado_path, {class: "btn btn-primary", style: "margin-top:-100px"} %>
+        </div>
+        <%end%>
+    </div>
+<section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center" >Administrar empleados</h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Dui</th>
+                      <th scope="col">Foto</th>
+                      <th scope="col">Nombres</th>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">Numero de telefono</th>
+                      <th scope="col">Fecha de nacimiento</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @empleados.each do |empleado| %>
+                        <tr>
+                            <th scope="row"><%= empleado.id %></th>
+                            <td><%= empleado.dui %></td>
+                            <td><%= image_tag empleado.foto_presentacion.variant(resize_to_limit: [150, 150]) %></td>
+                            <td><%= empleado.nombres %></td>
+                            <td><%= empleado.apellidos %></td>
+                            <td><%= empleado.numero_telefono %></td>
+                            <td><%= empleado.fecha_nacimiento %></td>
+                            <td>
+                                <%= link_to '', edit_empleado_path(empleado), {class: "bx bx-pencil", style: "color:blue;"} if acceso_a_accion_de_modulo?(current_usuario, "empleados", "actualizar") %>
+                                <%= link_to '', empleado, {method: :delete, class: "bx bx-trash", style: "color:red;", data: {confirm: "Estas seguro de eliminar este empleado?"}} if acceso_a_accion_de_modulo?(current_usuario, "empleados", "eliminar")%>
+                                <%= link_to 'Ver misiones', misiones_empleados_path(empleado: empleado.id)%>
+                            </td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+    <script>
+        $( document ).ready(function() {
+            $("#empleados").removeClass("collapsed");
+        });
+    </script>

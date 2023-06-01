@@ -8,11 +8,206 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   </head>
 
   <body>
+
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="/" class="logo d-flex align-items-center">
+        <%= image_tag "logo.png" %>
+        <span class="d-none d-lg-block">Control de misiones</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <% if current_usuario.present? %>
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <%= image_tag "usuario.png", class: "rounded-circle" %>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                        <h6><%= current_usuario.try(:empleado).present? ? current_usuario.empleado.presentacion : "Desconocido" %></h6>
+                        <span><%= current_usuario.try(:empleado).present? ? (current_usuario.empleado.departamento.nombre + " -> " + current_usuario.empleado.cargo.nombre) : "Desconocido" %></span>
+                        <span id="usuario_role" value="<%= current_usuario.role.nombre == "admin" ? "admins" : "otros"  %>"></span>
+                        </li>
+                        <li>
+                        <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                        <%= link_to destroy_usuario_session_path, {method: :delete, class: "dropdown-item d-flex align-items-center"} do %>
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Salir</span>
+                        <% end %>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+    <% end %>
+  </header>
+
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/" id="dashboard">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <% if acceso_a_modulo?(current_usuario, "cargos") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= cargos_path %>" id="cargos">
+          <i class="bi bi-briefcase"></i>
+          <span>Cargos</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "departamentos") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= departamentos_path %>" id="departamentos">
+          <i class="bi bi-sign-railroad"></i>
+          <span>Departamentos</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "permisos") %>   
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= permisos_path %>" id="permisos">
+          <i class="bx bx-key"></i>
+          <span>Permisos</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "roles") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= roles_path %>" id="roles">
+          <i class="bx bxs-user-badge"></i>
+          <span>Roles</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "empleados") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= empleados_path %>" id="empleados">
+          <i class="bi bi-person-badge"></i>
+          <span>Empleados</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "misiones") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= misiones_path %>" id="misiones">
+          <i class="bi bi-clipboard-data"></i>
+          <span>Misiones</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "misiones_empleados") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= misiones_empleados_path %>" id="misiones_empleados">
+          <i class="bi bi-link"></i>
+          <span>Empleados en misiones</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if acceso_a_modulo?(current_usuario, "usuarios") %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= usuarios_path %>" id="usuarios">
+          <i class="bi bi-person"></i>
+          <span>Usuarios</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% if current_usuario.present? && current_usuario.es_admin? %>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<%= log_actividades_path %>" id="log_actividades">
+          <i class="bi bi-card-list"></i>
+          <span>Log de actividades</span>
+        </a>
+      </li>
+      <% end %>
+
+    </ul>
+
+  </aside>
+
+  <main id="main" class="main">
+
+<!--     <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div> -->
+
     <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+    <% if flash[:alert].present? %>
+        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+            <p><%= flash[:alert] %></p>
+        </div>
+    <% end %>
+    <% if flash[:notice].present? %>
+        <div id="error_explanations" class="alert alert-success col-md-12 text-center">
+            <p><%= flash[:notice] %></p>
+        </div>
+    <% end %>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Control de misiones</span></strong>. All Rights Reserved
+    </div>
+  </footer>
+
+  <a class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <%= javascript_include_tag "apexcharts.min.js" %>
+    <%= javascript_include_tag "bootstrap.bundle.min.js" %>
+    <%= javascript_include_tag "chart.umd.js" %>
+    <%= javascript_include_tag "echarts.min.js" %>
+    <%= javascript_include_tag "quill.min.js" %>
+    <%= javascript_include_tag "simple-datatables.js" %>
+    <%= javascript_include_tag "tinymce.min.js" %>
+    <%= javascript_include_tag "validate.js" %>
+    <%= javascript_include_tag "animsition.min.js" %>
+    <%= javascript_include_tag "popper.js" %>
+    <%= javascript_include_tag "bootstrap.min.js" %>
+    <%= javascript_include_tag "select2.min.js" %>
+    <%= javascript_include_tag "moment.min.js" %>
+    <%= javascript_include_tag "daterangepicker.js" %>
+    <%= javascript_include_tag "countdowntime.js" %>
+    <%= javascript_include_tag "main.js" %>
+
+    <script>
+        $(document).ready(function(){
+            jQuery('.select2').select2({
+                //minimumResultsForSearch: -1
+            });
+         })
+    </script>
   </body>
 </html>

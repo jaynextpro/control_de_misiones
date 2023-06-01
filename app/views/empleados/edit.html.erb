@@ -1,0 +1,11 @@
+<h1>Modificar empleado</h1>
+
+<%= render 'form', empleado: @empleado, accion: "Actualizar empleado"  %>
+
+<%= link_to 'Regresar', empleados_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#empleados").removeClass("collapsed");
+        });
+    </script>

@@ -1,22 +1,54 @@
-<%= form_with(model: departamento) do |form| %>
-  <% if departamento.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(departamento.errors.count, "error") %> prohibited this departamento from being saved:</h2>
 
-      <ul>
-        <% departamento.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
 
-  <div class="field">
-    <%= form.label :nombre %>
-    <%= form.text_field :nombre %>
-  </div>
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Informacion del departamento</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_with(model: departamento) do |form| %>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+                    <div class="col-md-6">
+                      <label for="nombre" class="form-label">Nombre</label>
+                      <%= form.text_field :nombre, {class:"form-control", id:"nombre", required: "true"} %>
+                    </div>
+                    
+                    <!-- <div class="col-md-6">
+                      <label for="inputPassword5" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inputPassword5">
+                    </div>
+                   
+                    <div class="col-md-6">
+                      <label for="inputState" class="form-label">State</label>
+                      <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="text" class="form-control" id="inputZip">
+                    </div> -->
+    
+                    <div class="text-center">
+                      <%= form.submit accion, {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if departamento.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% departamento.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %><!-- End Multi Columns Form -->
+    
+                </div>
+              </div>
+  
+          </div>
+        </div>
+      </section>

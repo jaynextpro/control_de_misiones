@@ -1,0 +1,88 @@
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Informacion del empleado</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_with(model: empleado) do |form| %>
+                    <div class="col-md-6">
+                        <label for="departamento">Departamento</label>
+                        <%= form.select :departamento_id, options_from_collection_for_select(Departamento.all.order("nombre asc"), :id, :nombre, empleado.try(:departamento).try(:id)),{prompt: "Selecciona el departamento"}, {class: "form-control select2", id: "departamento", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cargo">Cargo</label>
+                        <%= form.select :cargo_id, options_from_collection_for_select(Cargo.all.order("nombre asc"), :id, :nombre, empleado.try(:cargo).try(:id)),{prompt: "Selecciona el cargo"}, {class: "form-control select2", id: "cargo", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="dui" class="form-label">Dui</label>
+                      <%= form.text_field :dui, {class:"form-control", id:"dui", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="nombres" class="form-label">Nombres</label>
+                      <%= form.text_field :nombres, {class:"form-control", id:"nombres", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="apellidos" class="form-label">Apellidos</label>
+                      <%= form.text_field :apellidos, {class:"form-control", id:"apellidos"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="numero_telefono" class="form-label">Numero de telefono</label>
+                      <%= form.text_field :numero_telefono, {class:"form-control", id:"numero_telefono"} %>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="fecha_nacimiento" class="form-label">Fecha nacimiento</label>
+                      <%= form.date_field :fecha_nacimiento, min: 100.years.ago, max: (Date.today - 18.years), class: "form-control", id: "fecha_nacimiento", required: true %>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <label for="foto_presentacion" class="form-label">Foto de presentacion</label>
+                      <%= form.file_field :foto_presentacion, {class:"form-control", id:"foto_presentacion"} %>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                      <label for="inputPassword5" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inputPassword5">
+                    </div>
+                   
+                    <div class="col-md-6">
+                      <label for="inputState" class="form-label">State</label>
+                      <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="text" class="form-control" id="inputZip">
+                    </div> -->
+    
+                    <div class="text-center">
+                      <%= form.submit accion, {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if empleado.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% empleado.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %><!-- End Multi Columns Form -->
+    
+                </div>
+              </div>
+  
+          </div>
+        </div>
+      </section>

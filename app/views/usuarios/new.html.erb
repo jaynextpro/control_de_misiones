@@ -1,0 +1,11 @@
+<h1>Agregar usuario</h1>
+
+<%= render 'form', usuario: @usuario, accion: "Crear usuario" %>
+
+<%= link_to 'Regresar', usuarios_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#usuarios").removeClass("collapsed");
+        });
+    </script>

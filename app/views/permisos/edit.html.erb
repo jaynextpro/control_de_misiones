@@ -1,0 +1,11 @@
+<h1>Modificar permiso</h1>
+
+<%= render 'form', permiso: @permiso, accion: "Actualizar permiso"  %>
+
+<%= link_to 'Regresar', permisos_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#permisos").removeClass("collapsed");
+        });
+    </script>

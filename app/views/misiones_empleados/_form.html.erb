@@ -1,0 +1,40 @@
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Informacion de la asignacion de empleado a mision</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_with(model: misiones_empleado) do |form| %>
+
+                    <div class="col-md-6">
+                        <label for="misione">Mision</label>
+                        <%= form.select :misione_id, options_from_collection_for_select(Misione.all.order("nombre asc"), :id, :nombre, misiones_empleado.try(:misione).try(:id)),{prompt: "Selecciona el misione"}, {class: "form-control select2", id: "misione", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="empleado">Empleado</label>
+                        <%= form.select :empleado_id, options_from_collection_for_select(Empleado.all.order("nombres asc"), :id, :presentacion, misiones_empleado.try(:empleado).try(:id)),{prompt: "Selecciona el empleado"}, {class: "form-control select2", id: "empleado", required: "true"} %>
+                    </div>
+    
+                    <div class="text-center">
+                      <%= form.submit accion, {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if misiones_empleado.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% misiones_empleado.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %><!-- End Multi Columns Form -->
+    
+                </div>
+              </div>
+  
+          </div>
+        </div>
+      </section>

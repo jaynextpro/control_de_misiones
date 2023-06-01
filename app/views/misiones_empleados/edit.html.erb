@@ -1,0 +1,11 @@
+<h1>Modificar asignacion de mision a empleado</h1>
+
+<%= render 'form', misiones_empleado: @misiones_empleado, accion: "Actualizar asignacion"  %>
+
+<%= link_to 'Regresar', misiones_empleados_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#misiones_empleados").removeClass("collapsed");
+        });
+    </script>

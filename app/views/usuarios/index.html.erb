@@ -1,0 +1,70 @@
+
+
+    <div class="pagetitle">
+      <h1>Usuarios</h1>
+      <br/>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><%= link_to 'Inicio', "/" %></li>
+          <li class="breadcrumb-item active">Usuarios</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+        <% if acceso_a_accion_de_modulo?(current_usuario, "usuarios", "crear") %>
+        <div class="col-6" style="text-align: right;">
+            <%= link_to 'Agregar usuario', new_usuario_path, {class: "btn btn-primary", style: "margin-top:-100px"} %>
+        </div>
+        <%end%>
+    </div>
+<section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+  
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title text-center" >Administrar usuarios</h5>
+  
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Empleado</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @usuarios.each do |usuario| %>
+                        <tr>
+                            <th scope="row"><%= usuario.id %></th>
+                            <td><%= usuario.role.nombre %></td>
+                            <td><%= usuario.try(:empleado).try(:presentacion) %></td>
+                            <td><%= usuario.email %></td>
+                            <td>
+                                <%= link_to '', edit_usuario_path(usuario), {class: "bx bx-pencil", style: "color:blue;"} if acceso_a_accion_de_modulo?(current_usuario, "usuarios", "actualizar") %>
+                                <%= link_to '', usuario, {method: :delete, class: "bx bx-trash", style: "color:red;", data: {confirm: "Estas seguro de eliminar este usuario?"}} if acceso_a_accion_de_modulo?(current_usuario, "usuarios", "eliminar")%>
+                            </td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                  
+                </table>
+                <!-- End Table with stripped rows -->
+  
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </section>
+
+    <script>
+        $( document ).ready(function() {
+            $("#usuarios").removeClass("collapsed");
+        });
+    </script>

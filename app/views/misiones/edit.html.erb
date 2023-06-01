@@ -1,0 +1,11 @@
+<h1>Modificar mision</h1>
+
+<%= render 'form', misione: @misione, accion: "Actualizar mision"  %>
+
+<%= link_to 'Regresar', misiones_path %>
+
+<script>
+        $( document ).ready(function() {
+            $("#misiones").removeClass("collapsed");
+        });
+    </script>

@@ -7,20 +7,20 @@ en:
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
+      already_authenticated: "Ya has iniciado sesion"
       inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
-      locked: "Your account is locked."
-      last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      invalid: "Email o contrasena invalida"
+      locked: "Tu cuenta esta bloqueda"
+      last_attempt: "Tienes un intento mas antes de que tu cuenta se bloquee"
+      not_found_in_database: "Email o contrasena invalida"
+      timeout: "Tu sesion ha expirado, porfavor inicia sesion de nuevo"
+      unauthenticated: "Necesitas iniciar sesion para continuar"
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Instrucciones para cambiar contrasena"
       unlock_instructions:
         subject: "Unlock instructions"
       email_changed:
@@ -31,11 +31,11 @@ en:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
-      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
-      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
-      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Your password has been changed successfully. You are now signed in."
-      updated_not_active: "Your password has been changed successfully."
+      no_token: "Acceso denegado"
+      send_instructions: "Recibiras un correo con las instrucciones para cambiar de contrasena en un momento"
+      send_paranoid_instructions: "Si tu correo existe en nuestra base de datos, recibiras un correo con las instrucciones para cambiar de contrasena en un momento"
+      updated: "Tu contrasena ha sido modificada correctamente, ya has iniciado sesion"
+      updated_not_active: "Tu contrasena ha sido modificada correctamente"
     registrations:
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -46,20 +46,20 @@ en:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
     sessions:
-      signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
-      already_signed_out: "Signed out successfully."
+      signed_in: "Has iniciado sesion satisfactoriamente"
+      signed_out: "Has cerrado sesion satisfactoriamente"
+      already_signed_out: "Ya has cerrado sesion"
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
   errors:
     messages:
-      already_confirmed: "was already confirmed, please try signing in"
-      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
-      expired: "has expired, please request a new one"
-      not_found: "not found"
-      not_locked: "was not locked"
+      already_confirmed: "ya fue confirmado"
+      confirmation_period_expired: "ha vencido, solicita uno nuevo"
+      expired: "ha vencido, solicita uno nuevo"
+      not_found: "no encontrado"
+      not_locked: "no estaba bloqueadi"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "1 error no permitio realizar la accion solicitada:"
+        other: "%{count} errores no permitieron realizar la accion solicitada:"

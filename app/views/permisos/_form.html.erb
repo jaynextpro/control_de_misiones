@@ -1,0 +1,88 @@
+
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Informacion del permiso</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_with(model: permiso) do |form| %>
+
+                    <div class="col-md-6">
+                        <label for="modulo">Modulo</label>
+                        <%= form.select :modulo_id, options_from_collection_for_select(Modulo.where.not("nombre = 'usuarios'").order("nombre asc"), :id, :nombre, permiso.try(:modulo).try(:id)),{prompt: "Selecciona el modulo"}, {class: "form-control select2", id: "modulo", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="role">Role</label>
+                        <%= form.select :role_id, options_from_collection_for_select(Role.where.not("nombre = 'admin'").order("nombre asc"), :id, :nombre, permiso.try(:role).try(:id)),{prompt: "Selecciona el role"}, {class: "form-control select2", id: "role", required: "true"} %>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="custom-checkbox">
+                            <label for="activo" class="custom-control-label">Activo</label>
+                            <%= form.check_box :activo, class: "custom-control" , id:"activo"%>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="custom-checkbox">
+                            <label for="crear" class="custom-control-label">Crear</label>
+                            <%= form.check_box :crear, class: "custom-control" , id:"crear"%>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="custom-checkbox">
+                            <label for="actualizar" class="custom-control-label">Actualizar</label>
+                            <%= form.check_box :actualizar, class: "custom-control" , id:"actualizar"%>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="custom-checkbox">
+                            <label for="eliminar" class="custom-control-label">Eliminar</label>
+                            <%= form.check_box :eliminar, class: "custom-control" , id:"eliminar"%>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                      <label for="inputPassword5" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inputPassword5">
+                    </div>
+                   
+                    <div class="col-md-6">
+                      <label for="inputState" class="form-label">State</label>
+                      <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="text" class="form-control" id="inputZip">
+                    </div> -->
+    
+                    <div class="text-center">
+                      <%= form.submit accion, {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if permiso.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% permiso.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %><!-- End Multi Columns Form -->
+    
+                </div>
+              </div>
+  
+          </div>
+        </div>
+      </section>

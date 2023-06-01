@@ -1,0 +1,2 @@
+module MisionesEmpleadosHelper
+end

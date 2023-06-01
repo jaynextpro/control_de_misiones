@@ -5,11 +5,11 @@ one:
   cargo: one
   nombres: MyString
   apellidos: MyString
-  email: MyString
+  numero_telefono: MyString
 
 two:
   departamento: two
   cargo: two
   nombres: MyString
   apellidos: MyString
-  email: MyString
+  numero_telefono: MyString

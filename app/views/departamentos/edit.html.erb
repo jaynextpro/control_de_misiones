@@ -1,6 +1,11 @@
-<h1>Editing Departamento</h1>
+<h1>Modificar departamento</h1>
 
-<%= render 'form', departamento: @departamento %>
+<%= render 'form', departamento: @departamento, accion: "Actualizar departamento"  %>
 
-<%= link_to 'Show', @departamento %> |
-<%= link_to 'Back', departamentos_path %>
+<%= link_to 'Regresar', departamentos_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#departamentos").removeClass("collapsed");
+        });
+    </script>

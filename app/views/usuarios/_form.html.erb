@@ -1,0 +1,73 @@
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Informacion del usuario</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_with(model: usuario) do |form| %>
+                    <div class="col-md-6">
+                        <label for="role">Role</label>
+                        <%= form.select :role_id, options_from_collection_for_select(Role.all.order("nombre asc"), :id, :nombre, usuario.try(:role).try(:id)),{prompt: "Selecciona el role"}, {class: "form-control select2", id: "role", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="empleado">Empleado</label>
+                        <%= form.select :empleado_id, options_from_collection_for_select(Empleado.all.order("nombres asc"), :id, :presentacion, usuario.try(:empleado).try(:id)),{prompt: "Selecciona el empleado"}, {class: "form-control select2", id: "empleado"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email</label>
+                      <%= form.email_field :email, {class:"form-control", id:"email", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="password" class="form-label">Contrasena</label>
+                      <%= form.password_field :password, {class:"form-control", id:"password", required: "true"} %>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="password_confirmation" class="form-label">Confirmacion de contrasena</label>
+                      <%= form.password_field :password_confirmation, {class:"form-control", id:"password_confirmation", required: true} %>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                      <label for="inputPassword5" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="inputPassword5">
+                    </div>
+                   
+                    <div class="col-md-6">
+                      <label for="inputState" class="form-label">State</label>
+                      <select id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="inputZip" class="form-label">Zip</label>
+                      <input type="text" class="form-control" id="inputZip">
+                    </div> -->
+    
+                    <div class="text-center">
+                      <%= form.submit accion, {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if usuario.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% usuario.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %><!-- End Multi Columns Form -->
+    
+                </div>
+              </div>
+  
+          </div>
+        </div>
+      </section>

@@ -1,0 +1,40 @@
+       <section class="section container-fluid h-100 bg-light text-dark justify-content-center">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center">
+
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Recuperar contrasena</h5>
+    
+                  <!-- Multi Columns Form -->
+                  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                    <%= f.hidden_field :reset_password_token %>
+
+                    <div class="form-group">
+                      <label for="password" class="form-label">Contrasena</label>
+                      <%= f.password_field :password, {class:"form-control", id:"password", required: true} %>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="password_confirmation" class="form-label">Confirmacion de contrasena</label>
+                      <%= f.password_field :password_confirmation, {class:"form-control", id:"password_confirmation", required: true} %>
+                    </div>
+                    
+    
+                    <div class="form-group">
+                      <%= f.submit "Enviar", {class: "btn btn-primary"} %>
+                    </div>
+
+                    <% if resource.errors.any? %>
+                        <div id="error_explanations" class="alert alert-danger col-md-12 text-center">
+                            <% resource.errors.each do |error| %>
+                                <p><%= error.full_message %></p>
+                            <% end %>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>

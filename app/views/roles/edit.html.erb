@@ -1,0 +1,11 @@
+<h1>Modificar role</h1>
+
+<%= render 'form', role: @role, accion: "Actualizar role"  %>
+
+<%= link_to 'Regresar', roles_path %>
+
+    <script>
+        $( document ).ready(function() {
+            $("#roles").removeClass("collapsed");
+        });
+    </script>

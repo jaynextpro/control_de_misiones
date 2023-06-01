@@ -1,0 +1,12 @@
+wb = xlsx_package.workbook
+
+headers_styles = wb.styles.add_style alignment: {horizontal: :left}, b: true, border: { style: :thin, color: "000000", edges: [:bottom] }
+records_styles = wb.styles.add_style alignment: {horizontal: :left, vertical: :center}
+
+wb.add_worksheet(name: "Buttons") do |sheet|
+    sheet.add_row ["Mision", "No de empleados", "Fecha inicio", "Fecha final"], style: headers_styles
+
+    @misiones_empleados.group_by(&:misione).each do |mision, asignaciones|
+        sheet.add_row [mision.nombre, asignaciones.count, mision.fecha_inicio.to_s, mision.fecha_final.to_s], style: records_styles   
+    end
+end
