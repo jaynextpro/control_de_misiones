@@ -1,5 +1,5 @@
 class Misione < ApplicationRecord
-    has_many :misiones_empleados
+    has_many :misiones_empleados, dependent: :destroy
     has_many :empleados, through: :misiones_empleados
 
     validates :nombre, uniqueness: {message: "ya existe"}

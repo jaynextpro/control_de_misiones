@@ -37,12 +37,12 @@ Rails.application.configure do
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.perform_caching = false
     config.action_mailer.perform_deliveries = true
-    config.action_mailer.default_url_options = { host: 'localhost:3000' }
+    config.action_mailer.default_url_options = { host: 'https://6a42-190-87-169-203.ngrok-free.app' }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       user_name:      '123fusiona@gmail.com',
       password:       'svefyblpeuupexmm',
-      domain:         'localhost:3000',
+      domain:         '6a42-190-87-169-203.ngrok-free.app',
       address:       'smtp.gmail.com',
       port:          '587',
       authentication: :plain,

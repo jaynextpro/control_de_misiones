@@ -11,7 +11,7 @@ module ControlDeMisiones
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
-    config.hosts << "testingtecha.pagekite.me"
+    config.hosts << "6a42-190-87-169-203.ngrok-free.app"
 
     # Configuration for the application, engines, and railties goes here.
     #

@@ -2,12 +2,12 @@ class Empleado < ApplicationRecord
   belongs_to :departamento
   belongs_to :cargo
   has_one :usuario, required: false
-  has_many :misiones_empleados
+  has_many :misiones_empleados, dependent: :destroy
   has_many :misiones, through: :misiones_empleados
   has_one_attached :foto_presentacion
 
   validates_presence_of :departamento, :cargo, :nombres, :apellidos, :fecha_nacimiento, :foto_presentacion, message: "no puede estar vacio"
-  validates :numero_telefono, format: {with: /\A([6-7]{1}\d{3}-\d{4}|[6-7]{1}\d{7})\z/, message: "es invalido"}, presence: { message: "no puede estar vacio" }, uniqueness: {message: "ya esta en uso", case_sensitive: false}
+  validates :numero_telefono, format: {with: /\A([2|6|7]{1}\d{3}-\d{4}|[2|6|7]{1}\d{7})\z/, message: "es invalido"}, presence: { message: "no puede estar vacio" }, uniqueness: {message: "ya esta en uso", case_sensitive: false}
   validates :dui, format: {with: /\A(\d{8}-\d{1}|\d{9})\z/, message: "es invalido"}, presence: { message: "no puede estar vacio" }, uniqueness: {message: "ya esta en uso", case_sensitive: false}
   validate :fecha_nacimiento_valida
   validate :foto_presentacion_valida
